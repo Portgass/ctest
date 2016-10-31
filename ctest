@@ -1,15 +1,25 @@
 #!/bin/bash
 
-PROG=$1
+gcc -Wall -pedantic main.c -lm -o output.out
+PROG="output.out"
 
-for INPUT in tests/????_in.txt
+if [ -n $1 -a $1 != " " ]
+then
+    QUERY="tests/$1_in.txt"
+else
+    QUERY="tests/????_in.txt"
+fi
+
+for INPUT in $QUERY
+sds
+sdajd
 do
     INPUT_FILENAME=`basename $INPUT` &&
-    OUTPUT=tests/${INPUT_FILENAME:0:4}_out.txt
+    OUTPUT_FILE=tests/${INPUT_FILENAME:0:4}_out.txt
 
     ./$PROG < $INPUT > output.txt
 
-    TEST=$(diff $OUTPUT output.txt)
+    TEST=$(diff $OUTPUT_FILE output.txt)
     if [ $? -eq 0 ]
     then
         tput setaf 2
