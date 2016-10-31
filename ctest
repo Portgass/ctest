@@ -11,8 +11,6 @@ else
 fi
 
 for INPUT in $QUERY
-sds
-sdajd
 do
     INPUT_FILENAME=`basename $INPUT` &&
     OUTPUT_FILE=tests/${INPUT_FILENAME:0:4}_out.txt
