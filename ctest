@@ -1,0 +1,33 @@
+#!/bin/bash
+
+PROG=$1
+
+for INPUT in tests/????_in.txt
+do
+    INPUT_FILENAME=`basename $INPUT` &&
+    OUTPUT=tests/${INPUT_FILENAME:0:4}_out.txt
+
+    ./$PROG < $INPUT > output.txt
+
+    TEST=$(diff $OUTPUT output.txt)
+    if [ $? -eq 0 ]
+    then
+        tput setaf 2
+        tput bold
+        echo "${INPUT_FILENAME:0:4}: Success"
+        tput sgr0
+    else
+        tput setaf 1
+        tput bold
+        echo -e "${INPUT_FILENAME:0:4}: Failed"
+        tput sgr0
+        tput bold
+        echo "For input:"
+        tput sgr0
+        echo -e "$( cat $INPUT )\n"
+        tput bold
+        echo "Error in:"
+        tput sgr0
+        echo -e "$TEST\n"
+    fi
+done
